@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资料整理与信息索引 · xingkong.com</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f2f5;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e293b;
+      line-height: 1.7;
+      padding: 2rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1080px;
+      width: 100%;
+    }
+
+    /* 卡片通用 */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+      padding: 2rem 2.2rem;
+      margin-bottom: 2rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    /* hero */
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem 2.5rem;
+      background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #0f172a;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #475569;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero .tagline {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      background: #eef2f6;
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      color: #334155;
+    }
+
+    /* 摘要区 */
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.2rem 0.6rem;
+    }
+
+    .summary p {
+      width: 100%;
+    }
+
+    .summary em {
+      font-style: normal;
+      background: #f1f5f9;
+      padding: 0.1rem 0.4rem;
+      border-radius: 6px;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    /* 亮点网格 */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+      margin-top: 0.4rem;
+    }
+
+    .highlight-item {
+      background: #f8fafc;
+      border-radius: 1rem;
+      padding: 1.2rem 1.4rem;
+      border: 1px solid #e9edf2;
+    }
+
+    .highlight-item h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .highlight-item p {
+      font-size: 0.92rem;
+      color: #334155;
+    }
+
+    /* 场景卡片 */
+    .scenario-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .scenario-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .scenario-item {
+      flex: 1 1 180px;
+      background: #f8fafc;
+      padding: 1rem 1.2rem;
+      border-radius: 1rem;
+      border: 1px solid #e9edf2;
+    }
+
+    .scenario-item .label {
+      font-weight: 500;
+      color: #1e293b;
+      margin-bottom: 0.25rem;
+    }
+
+    .scenario-item .desc {
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    /* 提示 / faq */
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item strong {
+      font-weight: 550;
+      color: #0f172a;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item p {
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    /* 链接样式 */
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      border-bottom-color: #93c5fd;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+      padding: 2rem 0 0.6rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1.2rem;
+    }
+
+    .footer-note a {
+      font-weight: 400;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+
+      .card {
+        padding: 1.5rem 1.2rem;
+        border-radius: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .highlights-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenario-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- hero -->
+  <div class="card hero">
+    <h1>资料整理 · 信息索引</h1>
+    <div class="sub">把散落的内容梳理成可回溯、可复用的结构，让归档本身成为一种生产力。</div>
+    <div class="tagline">以 <a href="https://com-xk.com">xingkong.com</a> 为支点的日常整理方案</div>
+  </div>
+
+  <!-- 摘要 -->
+  <div class="card summary">
+    <p>
+      每天我们都在接收、创建、转发大量信息——笔记、截图、链接、文档、碎片观点。
+      如果缺乏一个<em>轻量的索引逻辑</em>，这些内容就会沉入「已保存但再也找不到」的角落。
+      <a href="https://com-xk.com">xingkong.com</a> 提供了一种偏向内容目录的组织思路，
+      不依赖复杂标签体系，而是用「集合 + 备注」的方式为资料建立上下文。
+    </p>
+    <p style="margin-top: 0.5rem;">
+      它的核心不是存储，而是<em>关联与提示</em>——当你需要一份半年前的调研笔记、
+      一篇收藏的行业分析，或者只是某个项目的零散灵感，索引结构能帮你快速定位。
+    </p>
+  </div>
+
+  <!-- 亮点 -->
+  <div class="card">
+    <h2 style="font-weight: 500; font-size: 1.35rem; margin-bottom: 0.2rem; color: #0f172a;">几个值得留意的特点</h2>
+    <div style="font-size: 0.9rem; color: #475569; margin-bottom: 1.2rem;">没有花哨功能，但日常整理刚好够用</div>
+    <div class="highlights-grid">
+      <div class="highlight-item">
+        <h3>📁 轻量分组</h3>
+        <p>不需要数据库或云端同步，纯前端的分类卡片逻辑，所见即所得。</p>
+      </div>
+      <div class="highlight-item">
+        <h3>🔖 备注优先</h3>
+        <p>每条资料都能附上一段「为什么存它」的说明，方便以后回顾。</p>
+      </div>
+      <div class="highlight-item">
+        <h3>🔗 链接即索引</h3>
+        <p>直接保留原始来源的链接，整理的同时也保留了信息来源的脉络。</p>
+      </div>
+      <div class="highlight-item">
+        <h3>📄 无需注册</h3>
+        <p>页面结构清晰，复制、修改、本地存档都很自由，数据由你自己掌控。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 使用建议 / 场景 -->
+  <div class="card">
+    <h2 style="font-weight: 500; font-size: 1.35rem; margin-bottom: 1rem; color: #0f172a;">适合这样用</h2>
+    <div class="scenario-block">
+      <div class="scenario-row">
+        <div class="scenario-item">
+          <div class="label">📚 主题阅读</div>
+          <div class="desc">把同一本书、同一话题的多篇文章聚合到一张卡片，用备注写下核心论点。</div>
+        </div>
+        <div class="scenario-item">
+          <div class="label">🗂️ 项目归档</div>
+          <div class="desc">项目结束后，把关键文档、讨论链接、决策记录收拢在一起，方便半年后复查。</div>
+        </div>
+        <div class="scenario-item">
+          <div class="label">🏷️ 标签平替</div>
+          <div class="desc">如果你觉得标签系统太抽象，直接用「集合 + 一句话备注」更具体。</div>
+        </div>
+      </div>
+      <div class="scenario-row">
+        <div class="scenario-item">
+          <div class="label">✍️ 写作素材库</div>
+          <div class="desc">平时看到的案例、数据、引语，随手放进索引，写东西时直接翻卡片。</div>
+        </div>
+        <div class="scenario-item">
+          <div class="label">🧠 个人知识库</div>
+          <div class="desc">把学习笔记、课程大纲、思维导图链接集中管理，形成自己的知识索引。</div>
+        </div>
+        <div class="scenario-item">
+          <div class="label">📎 收藏夹升级</div>
+          <div class="desc">浏览器收藏夹只会越来越乱，搬到有备注的卡片结构里，可读性提升很多。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ摘要 / 提示 -->
+  <div class="card">
+    <h2 style="font-weight: 500; font-size: 1.35rem; margin-bottom: 0.8rem; color: #0f172a;">你可能想了解的</h2>
+    <div class="faq-item">
+      <strong>需要自己搭建服务器吗？</strong>
+      <p>不需要。整个页面是纯前端静态结构，你可以直接保存、部署到任何静态托管服务，或者本地用浏览器打开都行。<a href="https://com-xk.com">xingkong.com</a> 本身也提供了一份可直接使用的基础模板。</p>
+    </div>
+    <div class="faq-item">
+      <strong>数据安全怎么保证？</strong>
+      <p>所有内容都存在你自己指定的地方（比如本地文件、自己的服务器）。没有后台、没有数据库，也不收集任何用户信息。你甚至可以离线使用。</p>
+    </div>
+    <div class="faq-item">
+      <strong>和笔记软件有什么不同？</strong>
+      <p>笔记软件擅长「写」，而这份索引侧重「组织与查找」。它更适合管理那些不需要频繁编辑、但需要快速定位的参考资料。</p>
+    </div>
+    <div class="faq-item">
+      <strong>可以多人协作吗？</strong>
+      <p>目前是一个单人使用的工具。但如果你把页面放在共享文件夹或协作平台上，几个人一起维护一个索引文件也是可行的。</p>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="footer-note">
+    基于卡片结构的资料索引设计 · 更多信息可参考 <a href="https://com-xk.com">xingkong.com</a>
+  </div>
+
+</div>
+</body>
+</html>
